@@ -2,7 +2,7 @@
  * @Author: zongbao.yao
  * @Date: 2022-01-11 10:02:59
  * @LastEditors: zongbao.yao
- * @LastEditTime: 2022-01-11 10:09:32
+ * @LastEditTime: 2022-01-11 11:31:16
  * @Description: Notes
 -->
 # 开发前请阅读我
@@ -10,8 +10,8 @@
 
 ## 文件夹目录：
 
-- front : 前端 (Vue3 + Ts + Axios)
-- server: 服务端
+- front : 前端 ( Vue3 + Ts + Axios )
+- server: 服务端 ( Nest + Ts )
 
 ## 代码提交规范：
 
@@ -21,7 +21,7 @@
 - test:  测试代码
 
 
-## 前端相关
+## front前端相关
 
 ### 启动项目：
 
@@ -33,9 +33,21 @@
 ```
 
 
-## 服务端相关
-### 启动项目
+## server服务端相关
+
+## 目录介绍
+
+```javascript
+    src
+    ├── app.controller.spec.ts      带有单个路由的基本控制器示例
+    ├── app.controller.ts           对于基本控制器的单元测试样例
+    ├── app.module.ts               应用程序的根模块。
+    ├── app.service.ts              带有单个方法的基本服务
+    └── main.ts                     应用程序入口文件。它使用 NestFactory 用来创建 Nest 应用实例。
+```
+
+### 启动项目：
 
 ```cmd
-    npm run dev
+    npm run serve
 ```
