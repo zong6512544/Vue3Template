@@ -1,24 +1,28 @@
-<!--
- * @Author: zongbao.yao
- * @Date: 2022-01-11 10:02:59
- * @LastEditors: zongbao.yao
- * @LastEditTime: 2022-01-11 11:31:16
- * @Description: Notes
--->
 # 开发前请阅读我
 
 
-## 文件夹目录：
+**文件夹目录：**
 
 - front : 前端 ( Vue3 + Ts + Axios )
 - server: 服务端 ( Nest + Ts )
 
-## 代码提交规范：
+## Git规范：
+
+**分支管理**
+
+- master  上线分支
+- feature 版本分支
+- hotfix  bug修复分支
+- dev     开发分支
+
+
+**代码提交规范**
 
 - feat:  新增（xxx）功能模块
 - fix:   修复（xxx）功能模块
 - style: 样式的调整
 - test:  测试代码
+
 
 
 ## front前端相关
