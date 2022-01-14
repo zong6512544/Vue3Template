@@ -1,9 +1,8 @@
 ﻿var re = /x/;
 var witchModel = 0;
-var series = ['Potion-Maker', 'KantaiCollection']
+var series = ['Potion-Maker']
 var persons = {
     ['Potion-Maker']: ['Pio', 'Tia'],
-    ['KantaiCollection']: ['murakumo']
 };
 
 function ControlsModel() {
