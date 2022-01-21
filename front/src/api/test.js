@@ -1,9 +1,9 @@
-import request from "@/axios/index.js";
+import request from '@/axios/index.js'
 
-export function  getUserInfo(data) {
+export function getUserInfo(data) {
   return request({
-    url: "/userInfo",
-    method: "get",
-    data,
-  });
+    url: '/userInfo',
+    method: 'get',
+    data
+  })
 }

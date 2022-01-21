@@ -1,40 +1,29 @@
 <template>
-  <div class="Home">
-
-  </div>
+  <div class="Home"></div>
 </template>
 <script lang="ts">
-
 import { onBeforeMount, onMounted } from 'vue'
 
 export default {
   name: 'Home',
 
-  components: {
+  components: {},
+
+  setup() {
+    onMounted(() => {
+      console.log('test')
+    })
   },
 
-  setup ( ) {
+  computed: {},
 
-    onMounted(() => { console.log('test') })
+  watch: {},
 
-  },
-
-  computed: {
-  },
-
-  watch: {
-  },
-
-  methods: {
-  },
-
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-
 .Home {
-
 }
-
 </style>

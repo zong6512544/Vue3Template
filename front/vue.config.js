@@ -1,9 +1,9 @@
 // 引入配置
-const config = require("./config/index.js");
+const config = require('./config/index.js')
 // 是否为生产环境
 const isBuildEnv = function () {
-  return process.env.NODE_ENV === "production";
-};
+  return process.env.NODE_ENV === 'production'
+}
 // export
 module.exports = {
   // 部署应用包时的基本 URL:
@@ -37,13 +37,13 @@ module.exports = {
     // 外链的方式引用资源，不会打包到项目中
     externals: {},
     module: {
-      rules: [],
-    },
+      rules: []
+    }
   },
 
   // devServer代理
   devServer: {
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     // 项目运行是否自己打开
     open: true,
     // 自定义修改端口
@@ -51,13 +51,13 @@ module.exports = {
     // https
     https: false,
     // proxy配置跨域:
-    proxy: config.local.proxy,
+    proxy: config.local.proxy
   },
 
   pluginOptions: {
-    "style-resources-loader": {
-      preProcessor: "scss",
-      patterns: [],
-    },
-  },
-};
+    'style-resources-loader': {
+      preProcessor: 'scss',
+      patterns: []
+    }
+  }
+}
