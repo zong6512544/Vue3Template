@@ -2,7 +2,7 @@
  * @Author: zongbao.yao
  * @Date: 2021-12-28 10:22:48
  * @LastEditors: zongbao.yao
- * @LastEditTime: 2021-12-28 12:26:25
+ * @LastEditTime: 2022-01-21 14:48:10
  * @Description: axios封装
  */
 
@@ -12,11 +12,11 @@ import axios from 'axios'
 import { Toast } from 'vant'
 import { ElMessage } from 'element-plus'
 // utils
-import { isApp } from '@/utils/index.ts'
+import { isApp } from '@/utils/index'
 // class
 class HttpRequest {
   // 入口：
-  request(config) {
+  request(config: any) {
     // 创建axios实例
     const http = axios.create({
       baseURL: '',
@@ -34,9 +34,9 @@ class HttpRequest {
   }
 
   // 接口拦截：
-  interceptor(http) {
+  interceptor(http: any) {
     // request拦截
-    http.interceptors.request.use((config) => {
+    http.interceptors.request.use((config: any) => {
       // 1.携带必要参数（根据场景自定义）
       // ps:此处必要参数userId和corpId
       const defaultParams = {
@@ -60,7 +60,7 @@ class HttpRequest {
       }
       // 3.token加密处理（token具体由哪里传递与后端商定）
       // ps:此处将token进行sha256加密,带入请求头sign字段传递
-      const token = window.localStorage.getItem('token')
+      const token = window.localStorage.getItem('token') || ''
       config.headers.sign = this.createToken(token)
       // 4.接口同步,按照request请求时间顺序返回response
       // 防止：同一个接口频繁请求而导致的渲染错误问题
@@ -72,21 +72,21 @@ class HttpRequest {
          *另一个添加到请求配置中并随response返回
          *然后拿response返回的时间戳与全局变量中的去比对，如果不一致，则添加一个为按请求顺序返回的标记
          */
-        const date = Date.now()
-        window.isSync = window.isSync || {}
-        window.isSync[config.url] = config.isSync[config.url] = date
+        ;(<any>window).isSync = (<any>window).isSync || {}
+        ;(<any>window).isSync[config.url] = config.isSync[config.url] =
+          Date.now()
       }
       // config
       return config
     }),
-      (error) => {
+      (error: any) => {
         // 对请求错误做些什么
         console.log('请求拦截错误', error)
         //
         return Promise.reject(error)
       }
     // response拦截
-    http.interceptors.response.use((response) => {
+    http.interceptors.response.use((response: any) => {
       // 1.对响应数据做点什么
       if (!response) return
       // 2.获取响应数据(根据场景配置)
@@ -98,7 +98,7 @@ class HttpRequest {
       if (
         config.isSync &&
         config.isSync[requestUrl] &&
-        config.isSync[requestUrl] !== window.isSync[requestUrl]
+        config.isSync[requestUrl] !== (<any>window).isSync[requestUrl]
       ) {
         // 未按请求顺序返回，按异常处理
         return Promise.reject()
@@ -130,7 +130,7 @@ class HttpRequest {
         return data
       }
     }),
-      (error) => {
+      (error: any) => {
         // 对响应错误做点什么
         console.log('返回接口拦截时拦截到错误', error)
         // 响应错误处理
@@ -140,7 +140,7 @@ class HttpRequest {
   }
 
   // 格式化请求参数
-  formatParams(data) {
+  formatParams(data: any) {
     let bodyString = JSON.stringify(Object.assign(data))
     // 过滤特殊字符
     if (bodyString.length > 100) {
@@ -150,7 +150,7 @@ class HttpRequest {
   }
 
   // 过滤特殊字符
-  characterFilter(str) {
+  characterFilter(str: string) {
     let newStr = ''
     for (let i = 0; i < str.length; i++) {
       const us = str.charCodeAt(i)
@@ -162,13 +162,13 @@ class HttpRequest {
   }
 
   // 加密
-  createToken(token = '') {
+  createToken(token: string): string {
     // return sha256(token)
     return token
   }
 
   // msg错误提示
-  messageBox(message) {
+  messageBox(message: string): void {
     if (isApp()) {
       Toast.fail(message)
     } else {
@@ -177,15 +177,16 @@ class HttpRequest {
   }
 }
 
-export default function (config, isMock = false) {
+export default (config = {}, isMock = false): any => {
   // 控制api前缀
-  const prefix = '/api'
+  // const prefix = '/api'
+  const prefix = ''
   // 拼接完整url【不带域名ip地址】
-  config.url = prefix + config.url
+  ;(<any>config).url = prefix + (<any>config).url
   // 开启mock
   if (process.env.NODE_ENV === 'development' && isMock) {
     console.log('development api', isMock)
-    config.url = `/mock${config.url}`
+    ;(<any>config).url = `/mock${(<any>config).url}`
   }
   return new HttpRequest().request(config)
 }
