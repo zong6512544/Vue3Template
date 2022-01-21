@@ -12,7 +12,7 @@ import axios from "axios";
 import { Toast } from "vant";
 import { ElMessage } from "element-plus";
 // utils
-import { isApp } from "@/utils/index.js";
+import { isApp } from "@/utils/index.ts";
 // class
 class HttpRequest {
   // 入口：
@@ -66,7 +66,6 @@ class HttpRequest {
       // 防止：同一个接口频繁请求而导致的渲染错误问题
       // 原理：标记request请求队列、且返回最新的一次response
       // 使用：在请求参数data中添加isSync接口同步参数
-      console.log("config", config);
       if (config.data && config.data.isSync) {
         /*
          *生成一个时间戳，绑定到url，一个存到到全局变量，
@@ -125,11 +124,7 @@ class HttpRequest {
           // 跳转到登录页
           // router.replace({ path: '/login' })
         }
-        msg ||
-          this.messageBox({
-            type: "error",
-            message: data.msg,
-          });
+        msg || this.messageBox(data.msg);
         return Promise.reject(data);
       } else {
         return data;
