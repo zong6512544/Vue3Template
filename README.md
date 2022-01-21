@@ -27,6 +27,10 @@
 
 ## front前端相关
 
+### 安装
+
+在 VSCode 编辑器中安装 ESLint 和 Vetur 扩展插件
+
 ### 启动项目：
 
 ```cmd
@@ -53,5 +57,6 @@
 ### 启动项目：
 
 ```cmd
-    npm run serve
+    npm run start
+    npm run start:dev // 监听变化
 ```
